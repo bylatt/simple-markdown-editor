@@ -5,8 +5,12 @@ Just an experiment project to learn **WebAssembly** with **Golang**.
 ![Screen shot](/go-wasm-markdown-ss.png?raw=true)
 
 ### Run
-- Compile and run
+- compile and run
+```bash
+$ ./compile_n_run.sh
 ```
-./compile_n_run.sh
-```
-- [http://localhost:8080](http://localhost:8080)
+- [localhost:8080](http://localhost:8080)
+
+### Further reading
+- [Go WebAssembly](https://github.com/golang/go/wiki/WebAssembly)
+- [Syscall/js](https://golang.org/pkg/syscall/js/)
