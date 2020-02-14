@@ -13,4 +13,4 @@ $ ./compile_n_run.sh
 
 ### Further reading
 - [Go WebAssembly](https://github.com/golang/go/wiki/WebAssembly)
-- [Syscall/js](https://golang.org/pkg/syscall/js/)
+- [syscall/js](https://golang.org/pkg/syscall/js/)
