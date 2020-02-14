@@ -1,0 +1,63 @@
+<html>
+	<head>
+    <title>Markdown editor</title>
+		<meta charset="utf-8"/>
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, Helvetica, Arial, sans-serif;
+      }
+      #main {
+        width: 100%;
+        max-width: 40em;
+        margin: 2em auto;
+      }
+      #input {
+        display: block;
+        width: 100%;
+        border: solid 1px #eee;
+        font-family: monospace;
+      }
+      #output {
+        background-color: #f0f0f0;
+      }
+      .margin-2em-0 {
+        margin: 2em 0;
+      }
+      .padding-1em {
+        padding: 1em;
+      }
+      .center {
+        text-align: center;
+      }
+    </style>
+	</head>
+	<body>
+    <div id="main">
+      <div class="center">
+        <h1>Markdown editor</h1>
+      </div>
+      <textarea rows="20" class="margin-2em-0 padding-1em" id="input"></textarea>
+      <div class="margin-2em-0 padding-1em" id="output"></div>
+    </div>
+		<script src="wasm_exec.js"></script>
+		<script>
+      // Load go wasm
+			const go = new Go();
+			WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject).then((result) => { go.run(result.instance); });
+
+      // Enable tab in textarea
+      const textarea = document.getElementById('input');
+      textarea.onkeydown = function(e) {
+          if(e.keyCode==9 || e.which==9){
+              e.preventDefault();
+              var s = this.selectionStart;
+              this.value = this.value.substring(0,this.selectionStart) + "\t" + this.value.substring(this.selectionEnd);
+              this.selectionEnd = s+1; 
+          }
+      }
+		</script>
+  </body>
+</html>
