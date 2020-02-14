@@ -1,9 +1,11 @@
 <html>
-	<head>
+  <head>
     <title>Markdown editor</title>
-		<meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <style>
-      *, *::before, *::after {
+      *,
+      *::before,
+      *::after {
         box-sizing: border-box;
       }
       body {
@@ -33,31 +35,43 @@
         text-align: center;
       }
     </style>
-	</head>
-	<body>
+  </head>
+  <body>
     <div id="main">
       <div class="center">
         <h1>Markdown editor</h1>
       </div>
-      <textarea rows="20" class="margin-2em-0 padding-1em" id="input"></textarea>
+      <textarea
+        rows="20"
+        class="margin-2em-0 padding-1em"
+        id="input"
+      ></textarea>
       <div class="margin-2em-0 padding-1em" id="output"></div>
     </div>
-		<script src="wasm_exec.js"></script>
-		<script>
+    <script src="wasm_exec.js"></script>
+    <script>
       // Load go wasm
-			const go = new Go();
-			WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject).then((result) => { go.run(result.instance); });
+      const go = new Go();
+      WebAssembly.instantiateStreaming(
+        fetch("main.wasm"),
+        go.importObject
+      ).then(result => {
+        go.run(result.instance);
+      });
 
       // Enable tab in textarea
-      const textarea = document.getElementById('input');
+      const textarea = document.getElementById("input");
       textarea.onkeydown = function(e) {
-          if(e.keyCode==9 || e.which==9){
-              e.preventDefault();
-              var s = this.selectionStart;
-              this.value = this.value.substring(0,this.selectionStart) + "\t" + this.value.substring(this.selectionEnd);
-              this.selectionEnd = s+1; 
-          }
-      }
-		</script>
+        if (e.keyCode == 9 || e.which == 9) {
+          e.preventDefault();
+          var s = this.selectionStart;
+          this.value =
+            this.value.substring(0, this.selectionStart) +
+            "\t" +
+            this.value.substring(this.selectionEnd);
+          this.selectionEnd = s + 1;
+        }
+      };
+    </script>
   </body>
 </html>
